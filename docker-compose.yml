@@ -1,0 +1,12 @@
+version: "3.1"
+services:
+  redis:
+    image: redis:alpine
+  countme:
+    build: 
+      context: countme
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    environment:
+      COUNTME_REDIS_SERVER: redis

@@ -1,8 +1,15 @@
 from flask import Flask
+from flask_env import MetaFlaskEnv
 from redis import Redis
 
+class Configuration(metaclass=MetaFlaskEnv):
+    ENV_PREFIX='COUNTME_'
+    REDIS_SERVER='127.0.0.1'
+    REDIS_PORT=6379
+
 app = Flask(__name__)
-redis = Redis(host='127.0.0.1', port=6379)
+app.config.from_object(Configuration)
+redis = Redis(host=app.config['REDIS_SERVER'], port=app.config['REDIS_PORT'])
 
 @app.route('/')
 def hello():
