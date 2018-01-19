@@ -6,7 +6,7 @@ python:
   - '3.6'
 
 services: docker
-install: pip install --user awscli
+install: pip install awscli
 script:
   - docker-compose build
   - export PATH=$HOME/.local/bin:$PATH
