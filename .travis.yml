@@ -17,6 +17,6 @@ script:
   - eval $(aws ecr get-login --no-include-email --region us-west-2)
   - docker tag vctotechevalops_countme:latest 742602405696.dkr.ecr.us-west-2.amazonaws.com/vcto-tech-eval-ops:latest
   - docker push 742602405696.dkr.ecr.us-west-2.amazonaws.com/vcto-tech-eval-ops:latest
-  - KUBECONFIG=kubeconfig ./helm upgrade --namespace default --install vcto charts/
+  - KUBECONFIG=kubeconfig ./helm upgrade --namespace default --install vcto ./chart/
 after_script:
   - rm kubeconfig
