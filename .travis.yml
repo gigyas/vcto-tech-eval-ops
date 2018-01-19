@@ -6,4 +6,5 @@ python:
   - '3.6'
 
 services: docker
-install: docker-compose build
+install: true
+script: docker-compose build
