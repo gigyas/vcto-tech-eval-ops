@@ -6,5 +6,10 @@ python:
   - '3.6'
 
 services: docker
-install: true
-script: docker-compose build
+install: pip install --user awscli
+script:
+  - docker-compose build
+  - export PATH=$HOME/.local/bin:$PATH
+  - eval $(aws ecr get-login --no-include-email --region us-west-2)
+  - docker tag countme:latest 742602405696.dkr.ecr.us-west-2.amazonaws.com/vcto-tech-eval-ops:latest
+  - docker push 742602405696.dkr.ecr.us-west-2.amazonaws.com/vcto-tech-eval-ops:latest
