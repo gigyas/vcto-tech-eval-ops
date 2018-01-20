@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Helm chart for Alegion countme application
+name: countme
+version: 0.1.0

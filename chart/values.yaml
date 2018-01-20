@@ -1,0 +1,41 @@
+# Default values for chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 2
+image:
+  repository: 742602405696.dkr.ecr.us-west-2.amazonaws.com/vcto-tech-eval-ops
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  name: countme
+  type: ClusterIP
+  externalPort: 80
+  internalPort: 5000
+ingress:
+  enabled: true
+  # Used to create an Ingress record.
+  hosts:
+    - countme.codingbyday.com
+  annotations:
+    kubernetes.io/ingress.class: tectonic
+    # kubernetes.io/tls-acme: "true"
+  tls:
+    # Secrets must be manually created in the namespace.
+    - secretName: countme-tls
+      hosts:
+        - countme.codingbyday.com
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+redis:
+  usePassword: false
+  persistence:
+    enabled: false
