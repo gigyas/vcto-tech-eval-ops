@@ -17,13 +17,11 @@ ingress:
   hosts:
     - countme.codingbyday.com
   annotations:
-    kubernetes.io/ingress.class: tectonic
-    # kubernetes.io/tls-acme: "true"
-  tls:
-    # Secrets must be manually created in the namespace.
-    - secretName: countme-tls
-      hosts:
-        - countme.codingbyday.com
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/server-snippet: |
+      if ( $http_x_forwarded_proto = http ) {
+        rewrite ^(.*) https://$host$1 permanent;
+      }
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
