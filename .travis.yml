@@ -19,6 +19,6 @@ script:
   - docker push 742602405696.dkr.ecr.us-west-2.amazonaws.com/vcto-tech-eval-ops:latest
   - KUBECONFIG=kubeconfig ./helm init --client-only
   - KUBECONFIG=kubeconfig ./helm dep up ./chart/
-  - KUBECONFIG=kubeconfig ./helm upgrade --namespace default --install vcto ./chart/
+  - KUBECONFIG=kubeconfig ./helm upgrade --namespace staging --install vcto ./chart/
 after_script:
   - rm kubeconfig
